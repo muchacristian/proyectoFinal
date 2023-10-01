@@ -23,65 +23,7 @@ class Guitarra {
   }
 }
 
-//Array de objetos.
-const guitarras = [
-  {
-    id: 0,
-    marca: "Fender",
-    modelo: "Telecaster",
-    precio: 150000,
-    img: "./img/fender.jpg",
-  },
-  {
-    id: 1,
-    marca: "Gibson",
-    modelo: "Les Paul",
-    precio: 200000,
-    img: "./img/gibson.jpeg",
-  },
-  {
-    id: 2,
-    marca: "Yamaha",
-    modelo: "Pacifica",
-    precio: 130000,
-    img: "./img/yamaha.jpg",
-  },
-  {
-    id: 3,
-    marca: "Gretsch",
-    modelo: "Electromatic",
-    precio: 320000,
-    img: "./img/gretsch.jpg",
-  },
-  {
-    id: 4,
-    marca: "Ibanez",
-    modelo: "J. Custom",
-    precio: 180000,
-    img: "./img/ibanez.jpg",
-  },
-  {
-    id: 5,
-    marca: "ESP",
-    modelo: "Stratocaster",
-    precio: 210000,
-    img: "./img/esp.jpg",
-  },
-  {
-    id: 6,
-    marca: "Taylor",
-    modelo: "Electroacustica",
-    precio: 130000,
-    img: "./img/taylor.jpg",
-  },
-  {
-    id: 7,
-    marca: "Martin",
-    modelo: "Electroacustica",
-    precio: 135000,
-    img: "./img/martin.jpg",
-  },
-];
+let guitarras = [];
 
 //funcion para elminar un solo objeto
 function eliminarDelCarrito(id) {
@@ -127,7 +69,7 @@ function eliminarDelCarrito(id) {
   }
 }
 
-//Esta tabla tambien la saque de otro proyecto, fue lo mas simple que entendi para plasmar el carrito
+//imprime una tabla en el html del carrito.
 function imprimirTabla(array) {
   let precioTotal = obtenerPrecioTotal(array);
   let contenedor = document.getElementById("carrito");
@@ -139,10 +81,10 @@ function imprimirTabla(array) {
           <table id="tablaCarrito" class="table table-striped">
               <thead>         
                   <tr>
-                      <th>Guitarra</th>
-                      <th>Cantidad</th>
-                      <th>Precio</th>
-                      <th>Accion</th>
+                      <th class="fs-4">Guitarra</th>
+                      <th class="fs-4">Cantidad</th>
+                      <th class="fs-4">Precio</th>
+                      <th class="fs-4">Accion</th>
                   </tr>
               </thead>
   
@@ -158,9 +100,9 @@ function imprimirTabla(array) {
   for (let guitarra of array) {
     let datos = document.createElement("tr");
     datos.innerHTML = `
-                  <td>${guitarra.marca}</td>
-                  <td>${guitarra.cantidad}</td>
-                  <td>$${guitarra.precioTotal}</td>
+                  <td class="fw-bold">${guitarra.marca}</td>
+                  <td class="fw-bold">${guitarra.cantidad}</td>
+                  <td class="fw-bold">$${guitarra.precioTotal}</td>
                   <td><button id="eliminar${guitarra.id}" class="btn btn-dark">Eliminar</button></td>
         `;
 
@@ -204,36 +146,32 @@ function imprimirTabla(array) {
       },
       buttonsStyling: false,
     });
-
- 
-      
-      swalWithBootstrapButtons
-        .fire({
-          title: `Esta seguro de realizar la compra por $${precioTotal}`,
-          text: "Por favor revise la informacion antes de confirmar su compra",
-          icon: "warning",
-          showCancelButton: true,
-          confirmButtonText: "Si, Estoy seguro!",
-          cancelButtonText: "No, cancelar!",
-          reverseButtons: true,
-        })
-        .then((result) => {
-          if (result.isConfirmed) {
-            swalWithBootstrapButtons.fire(
-              "¡Compra Realizada!",
-              "Gracias por elegirnos",
-              "success"
-            );
-          } else if (result.dismiss === Swal.DismissReason.cancel) {
-            swalWithBootstrapButtons.fire(
-              "Compra Cancelada",
-              "¡Vamos! Sigamos buscando!",
-              "error"
-            );
-          }
-        });
-      comprar();4
-      
+    swalWithBootstrapButtons
+      .fire({
+        title: `Esta seguro de realizar la compra por $${precioTotal}`,
+        text: "Por favor revise la informacion antes de confirmar su compra",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonText: "Si, Estoy seguro!",
+        cancelButtonText: "No, cancelar!",
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire(
+            "¡Compra Realizada!",
+            "Gracias por elegirnos",
+            "success"
+          );
+        } else if (result.dismiss === Swal.DismissReason.cancel) {
+          swalWithBootstrapButtons.fire(
+            "Compra Cancelada",
+            "¡Vamos! Sigamos buscando!",
+            "error"
+          );
+        }
+      });
+    comprar();
   });
 }
 
@@ -265,7 +203,7 @@ function cargarDom(array) {
   let contenedor = document.getElementById("contenedor");
   contenedor.innerHTML = "";
 
-  //creacion de Cards, por cada objeto del array guitarras
+  //creacion de Cartas, por cada objeto del array guitarras
   for (const guitarra of array) {
     let carta = document.createElement("div");
 
@@ -354,11 +292,6 @@ function comprar() {
 
   document.getElementById("carrito").innerHTML = "";
   document.getElementById("acciones-carrito").innerHTML = "";
-
-  let compra = document.getElementById("carrito");
-  compra.innerHTML = "";
-
-  compra.appendChild(texto);
 }
 
 //Con el metodo filter filtramos la busqueda por marca y modelo de las guitarras
@@ -377,9 +310,35 @@ function filtrarBusqueda(element) {
   // una vez filtrado agregamos como parametro el array filtrado a la funcion que imprime en el html
 }
 
+const pedirDatos = async () => {
+  try {
+    const datosSinProcesar = await fetch("/json/productos.json");
+    let datosProcesados = await datosSinProcesar.json();
+
+    datosProcesados.forEach((producto) => {
+      guitarras.push(producto);
+    });
+  } catch (error) {
+    Swal.fire({
+      icon: "error",
+      title: "Los productos no pueden ser cargados en este momento",
+      text: `${error}`,
+    });
+  } finally {
+    cargarDom(guitarras);
+  }
+};
+
 let btnFiltrar = document.getElementById("btnFiltrar");
 btnFiltrar.addEventListener("click", filtrarBusqueda);
 
-cargarDom(guitarras);
+//App Web, llama a la funcion que pide los datos al fetch, y a la funcion que redendiza los productos
+const tiendaDeGuitarrasApp = () => {
+  pedirDatos();
+  cargarDom(guitarras);
+};
 
+tiendaDeGuitarrasApp();
+
+//carrito de compras
 const carrito = chequearCarritoEnStorage();
