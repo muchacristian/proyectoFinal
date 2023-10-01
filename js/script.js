@@ -24,7 +24,6 @@ class Guitarra {
 }
 
 let guitarras = [];
-
 //funcion para elminar un solo objeto
 function eliminarDelCarrito(id) {
   //buscamos por id y por el indice del producto
