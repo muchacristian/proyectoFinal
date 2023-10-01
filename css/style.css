@@ -1,8 +1,18 @@
-#title {
-    display: flex;
-    justify-content: center;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+body {
+  background: rgb(186, 159, 196);
+  background: linear-gradient(
+    90deg,
+    rgba(186, 159, 196, 1) 18%,
+    rgba(135, 127, 222, 1) 35%,
+    rgba(88, 151, 217, 1) 68%,
+    rgba(223, 176, 227, 1) 79%
+  );
+}
+
+
+
+header h1 {
+  color: #fff;
 }
 
 #contenedor {
@@ -23,3 +33,4 @@
   font-size: 2rem;
   margin-bottom: 3rem;
 }
+

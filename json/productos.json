@@ -1,0 +1,58 @@
+[
+  {
+    "id": 0,
+    "marca": "Fender",
+    "modelo": "Telecaster",
+    "precio": 150000,
+    "img": "./img/fender.jpg"
+  },
+  {
+    "id": 1,
+    "marca": "Gibson",
+    "modelo": "Les Paul",
+    "precio": 200000,
+    "img": "./img/gibson.jpeg"
+  },
+  {
+    "id": 2,
+    "marca": "Yamaha",
+    "modelo": "Pacifica",
+    "precio": 130000,
+    "img": "./img/yamaha.jpg"
+  },
+  {
+    "id": 3,
+    "marca": "Gretsch",
+    "modelo": "Electromatic",
+    "precio": 320000,
+    "img": "./img/gretsch.jpg"
+  },
+  {
+    "id": 4,
+    "marca": "Ibanez",
+    "modelo": "J. Custom",
+    "precio": 180000,
+    "img": "./img/ibanez.jpg"
+  },
+  {
+    "id": 5,
+    "marca": "ESP",
+    "modelo": "Stratocaster",
+    "precio": 210000,
+    "img": "./img/esp.jpg"
+  },
+  {
+    "id": 6,
+    "marca": "Taylor",
+    "modelo": "Electroacustica",
+    "precio": 130000,
+    "img": "./img/taylor.jpg"
+  },
+  {
+    "id": 7,
+    "marca": "Martin",
+    "modelo": "Electroacustica",
+    "precio": 135000,
+    "img": "./img/martin.jpg"
+  }
+]
