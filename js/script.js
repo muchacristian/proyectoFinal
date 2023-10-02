@@ -1,5 +1,4 @@
 //Codigo simulador de tienda de guitarras
-
 class Guitarra {
   constructor(guitarra, cantidad) {
     this.id = guitarra.id;
