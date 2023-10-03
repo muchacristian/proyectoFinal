@@ -310,7 +310,7 @@ function filtrarBusqueda(element) {
 
 const pedirDatos = async () => {
   try {
-    const datosSinProcesar = await fetch("/json/productos.json");
+    const datosSinProcesar = await fetch("./json/productos.json");
     let datosProcesados = await datosSinProcesar.json();
 
     datosProcesados.forEach((producto) => {
