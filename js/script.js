@@ -308,14 +308,17 @@ function filtrarBusqueda(element) {
   // una vez filtrado agregamos como parametro el array filtrado a la funcion que imprime en el html
 }
 
+// Funcion asincronica que llama los datos del archivo json
 const pedirDatos = async () => {
   try {
     const datosSinProcesar = await fetch("./json/productos.json");
     let datosProcesados = await datosSinProcesar.json();
 
+    //agrego al array de guitarras cada objeto del archivo json
     datosProcesados.forEach((producto) => {
       guitarras.push(producto);
     });
+    //capturo el error
   } catch (error) {
     Swal.fire({
       icon: "error",
